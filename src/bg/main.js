@@ -13,10 +13,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     data.groups[request.value.groupName] = request.value;
     update();
     if (data.groups[request.value.groupName].docId) {
+      // console.log(sh.tool.genAddTo(request.value))
       sh.addToExisting(request.value.docId, request.value, (docId) => {
         sendResponse(docId)
       })
     } else {
+      // console.log(sh.tool.genNew(request.value))
       sh.createNew(request.value, (docId) => {
         data.groups[request.value.groupName].docId = docId;
         sendResponse(docId)
@@ -26,9 +28,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   }
 
   if (request.type == 'get')
-    chrome.storage.sync.get(['data'], function(result) {
-      sendResponse(result.data)
-    });
+    sendResponse(data)
+    // chrome.storage.sync.get(['data'], function(result) {
+    // });
 
   if (request.type == 'update')
     update(request.value)
@@ -94,7 +96,9 @@ var sh = {
       Object.keys(data.body).forEach(function(bodyKey) {
         var record = []
         data.head.forEach(function(key) {
-          data.body[bodyKey][key] ? record.push(data.body[bodyKey][key].toString()) : record.push('?')
+          var value = data.body[bodyKey][key];
+          if(key=='id') value = formatDate(data.body[bodyKey][key])
+          value ? record.push(value.toString()) : record.push('?')
         })
         newData.values.push(record)
       })
@@ -123,7 +127,9 @@ var sh = {
       Object.keys(data.body).forEach(function(bodyKey, index) {
         var record = []
         data.head.forEach(function(key) {
-          data.body[bodyKey][key] ? record.push(data.body[bodyKey][key]) : record.push('?')
+          var value = data.body[bodyKey][key];
+          if(key=='id') value = formatDate(data.body[bodyKey][key])
+          value ? record.push(value.toString()) : record.push('?')
         })
         var newRecord = []
         record.forEach(function(el){
@@ -192,4 +198,29 @@ chrome.storage.sync.get(["data"], function(items) {
 function update(e) {
   if (e) data = Object.assign(data, e)
   chrome.storage.sync.set({ "data": data });
+}
+
+
+
+
+
+
+
+
+
+function formatDate(id) {
+  var date = new Date(id*1000)
+
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + '.' + monthIndex + '.' + year;
 }

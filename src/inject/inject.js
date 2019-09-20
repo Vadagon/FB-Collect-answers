@@ -27,20 +27,46 @@ function tryAdd() {
 		if(!$(where).find('#FunnelCollect').length) $(collectAllButton).prependTo(where).click(parseFeed)
 		if(!$(where).find('a#funnelLink').length && groupName && data.groups[groupName] && data.groups[groupName].docId)  $('<a target="_blank" id="funnelLink" href="https://docs.google.com/spreadsheets/d/'+data.groups[groupName].docId+'/" style="margin-right: 10px;"> Google Sheet</a>').prependTo(where)
 
+
+		// if(!$('#funnelTunnelProccess').length) parseFeed()
 		// clearInterval(inter)
 	}, 300);
 }
-
+var parseInterval;
 function parseFeed(){
+	var i = 0;
+	var hhh = $(document).height();
+	parseInterval = setInterval(function() {
+		i++;
+		$("html, body").animate({ scrollTop: $(document).height() }, 300);
+		if(hhh !== $(document).height()) {
+			hhh = $(document).height()
+			i = 0;
+		}
+		if(i>10) loadFeed()
+	}, 300);
+	$(`<div id="funnelTunnelProccess">
+		<div>Click to Stop</div>
+	   </div>`).prependTo('#member_requests_pagelet').find('div').click(function(){
+	   	loadFeed()
+	   })
+	// loadFeed()
+}
+function loadFeed(){
+
+	$('#funnelTunnelProccess').remove()
+	$("html, body").animate({ scrollTop: 0 }, 1400);
+	parseInterval && clearInterval(parseInterval)
+
 	var groupName = $('#seo_h1_tag a').text()
 	if(!data.groups[groupName]) data.groups[groupName] = {head: [], body: {}, docId: !1, groupName: groupName}
 	var unSortedData = []
 	$('#member_requests_pagelet .uiList._4kg._4kt._6-h._6-j > li').each(function(){
 		var record = {}
 		record.groupName = groupName;
-		record.url = $(this).find('._66jq a')[0].href
-		record.userId = $(this).find('._66jq a').attr('href').slice(1)
 		record.name = $(this).find('._66jq a').text()
+		record.userId = $(this).find('._66jq a').attr('href').slice(1)
+		record.url = $(this).find('._66jq a')[0].href
 		record.id = $(this).find('.livetimestamp').data('utime')
 		$(this).find('._4wsr li').each(function(){
 			record[$(this).find('div').text()] = $(this).find('text').text();
