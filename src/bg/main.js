@@ -4,6 +4,9 @@ var data = {
   groups: {}
 }
 
+chrome.identity.getAuthToken({ interactive: true }, (token) => {
+  sh.token = token
+})
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.type == 'open')
