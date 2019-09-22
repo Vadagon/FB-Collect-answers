@@ -36,46 +36,43 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
   return true;
 });
-// 708115076090-m4e0iap111lk85l489e8qnls5f7hb014.apps.googleusercontent.com
-// cIPkA3NKvsFqxM0LtgwkZvFl
-// AIzaSyAAqqg5wA-XeePyvfl2Id8cI6xZ3DED9TA
-var params1 = {
-  "majorDimension": "ROWS",
-  "values": [
-    ["Hello1", "World1", "123123"],
-    ["Hello1", "World1", "123123"]
-  ],
-}
+// var params1 = {
+//   "majorDimension": "ROWS",
+//   "values": [
+//     ["Hello1", "World1", "123123"],
+//     ["Hello1", "World1", "123123"]
+//   ],
+// }
 
-var params2 = {
-  properties: {
-    title: 'About lena #3'
-  },
-  sheets: [{
-    data: [{
-      "startRow": 0,
-      "startColumn": 0,
-      "rowData": [{
-        "values": [{
-            userEnteredValue: {
-              "stringValue": 'lena the best!!!'
-            }
-          },
-          {
-            userEnteredValue: {
-              "stringValue": 'lena the best!!!'
-            }
-          },
-          {
-            userEnteredValue: {
-              "stringValue": 'lena the best!!!'
-            }
-          }
-        ]
-      }]
-    }]
-  }]
-}
+// var params2 = {
+//   properties: {
+//     title: 'About lena #3'
+//   },
+//   sheets: [{
+//     data: [{
+//       "startRow": 0,
+//       "startColumn": 0,
+//       "rowData": [{
+//         "values": [{
+//             userEnteredValue: {
+//               "stringValue": 'lena the best!!!'
+//             }
+//           },
+//           {
+//             userEnteredValue: {
+//               "stringValue": 'lena the best!!!'
+//             }
+//           },
+//           {
+//             userEnteredValue: {
+//               "stringValue": 'lena the best!!!'
+//             }
+//           }
+//         ]
+//       }]
+//     }]
+//   }]
+// }
 var sh = {
   token: !1,
   genToken: function(cb) {
@@ -86,6 +83,10 @@ var sh = {
   },
   tool: {
     genAddTo: function(data) {
+      data.head = data.head.map((el)=>{
+        if(el == 'id') el = 'Date';
+        return el;
+      })
       var newData = {
         majorDimension: "ROWS",
         values: [
@@ -96,14 +97,18 @@ var sh = {
         var record = []
         data.head.forEach(function(key) {
           var value = data.body[bodyKey][key];
-          if(key=='id') value = formatDate(data.body[bodyKey][key])
-          value ? record.push(value.toString()) : record.push('?')
+          if(key=='Date') value = formatDate(data.body[bodyKey][key])
+          value ? record.push(value.toString()) : record.push('')
         })
         newData.values.push(record)
       })
       return newData;
     },
     genNew: function(data) {
+      data.head = data.head.map((el)=>{
+        if(el == 'id') el = 'Date';
+        return el;
+      })
       var newData = {
         properties: {
           title: data.groupName
@@ -127,8 +132,8 @@ var sh = {
         var record = []
         data.head.forEach(function(key) {
           var value = data.body[bodyKey][key];
-          if(key=='id') value = formatDate(data.body[bodyKey][key])
-          value ? record.push(value.toString()) : record.push('?')
+          if(key=='Date') value = formatDate(data.body[bodyKey][key])
+          value ? record.push(value.toString()) : record.push('')
         })
         var newRecord = []
         record.forEach(function(el){

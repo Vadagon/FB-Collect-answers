@@ -61,7 +61,8 @@ function loadFeed(){
 	var groupName = $('#seo_h1_tag a').text()
 	if(!data.groups[groupName]) data.groups[groupName] = {head: [], body: {}, docId: !1, groupName: groupName}
 	var unSortedData = []
-	$('#member_requests_pagelet .uiList._4kg._4kt._6-h._6-j > li').each(function(){
+	$('#member_requests_pagelet .uiList._4kg._4kt._6-h._6-j > li').each(function(){ try{
+
 		var record = {}
 		record.groupName = groupName;
 		record.name = $(this).find('._66jq a').text()
@@ -75,7 +76,7 @@ function loadFeed(){
 			if(!data.groups[groupName].head.includes(key)) data.groups[groupName].head.push(key)
 		})
 		if(!jQuery.isEmptyObject(record) && !data.groups[groupName].body[record.id]) data.groups[groupName].body[record.id] = record;
-	})
+	}catch(err){console.log(err);} })
 
 	tunnel({type: 'push', value: data.groups[groupName]}, function(docId){
 		data.groups[groupName].docId = docId;
