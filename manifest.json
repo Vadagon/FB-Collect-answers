@@ -1,9 +1,8 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
-  "version": "1",
+  "name": "Social Media Collectior",
+  "version": "2",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Description for the project",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",

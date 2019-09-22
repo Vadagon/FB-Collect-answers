@@ -97,7 +97,7 @@ var sh = {
         var record = []
         data.head.forEach(function(key) {
           var value = data.body[bodyKey][key];
-          if(key=='Date') value = formatDate(data.body[bodyKey][key])
+          if(key=='Date') value = formatDate(data.body[bodyKey]['id'])
           value ? record.push(value.toString()) : record.push('')
         })
         newData.values.push(record)
@@ -132,7 +132,7 @@ var sh = {
         var record = []
         data.head.forEach(function(key) {
           var value = data.body[bodyKey][key];
-          if(key=='Date') value = formatDate(data.body[bodyKey][key])
+          if(key=='Date') value = formatDate(data.body[bodyKey]['id'])
           value ? record.push(value.toString()) : record.push('')
         })
         var newRecord = []
