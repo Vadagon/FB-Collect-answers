@@ -1,10 +1,10 @@
 {
-  "name": "Social Media Collectior",
-  "version": "2",
+  "name": "Group Answers Collector For Facebook™",
+  "short_name": "GAC",
+  "version": "3",
   "manifest_version": 2,
-  "description": "Description for the project",
+  "description": "Export users' answers to Google Sheets",
   "icons": {
-    "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },

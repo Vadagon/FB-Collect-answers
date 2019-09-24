@@ -9,10 +9,10 @@
 	top: 0px;
 	left: 0px;
 	font-size: 22px;
-	z-index: 200;
-	width: 100vh;
-    height: 100vh;
     background-color: #ffffff73;
+    z-index: 2000;
+    width: 100vw;
+    height: 100vh;
 }
 #funnelTunnelProccess > div{
 	margin: auto;

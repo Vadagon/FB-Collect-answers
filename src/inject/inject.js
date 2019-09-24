@@ -18,12 +18,14 @@ $(document).ready(function() {
 
 function tryAdd() {
 	var where = '#member_requests_pagelet ._51xa:first'
+	var unlinkButton = '<button id="FunnelUnlinkButton" class="_4jy0 _4jy3 _517h _51sy _42ft">Unlink Spreadsheet</button>'
 	var collectAllButton = '<button id="FunnelCollect" class="_4jy0 _4jy3 _517h _51sy _42ft">Collect All</button>'
 	var inter = setInterval(function() {
 		if(!$(where).length) return;
 
 		var groupName = $('#seo_h1_tag a').text()
 
+		if(!$(where).find('#FunnelUnlinkButton').length) $(unlinkButton).prependTo(where).click(unlinkFeed)
 		if(!$(where).find('#FunnelCollect').length) $(collectAllButton).prependTo(where).click(parseFeed)
 		if(!$(where).find('a#funnelLink').length && groupName && data.groups[groupName] && data.groups[groupName].docId)  $('<a target="_blank" id="funnelLink" href="https://docs.google.com/spreadsheets/d/'+data.groups[groupName].docId+'/" style="margin-right: 10px;"> Google Sheet</a>').prependTo(where)
 
@@ -33,6 +35,14 @@ function tryAdd() {
 	}, 300);
 }
 var parseInterval;
+function unlinkFeed(){
+	var groupName = $('#seo_h1_tag a').text()
+	data.groups[groupName].docId = false;
+	tunnel({type: 'unlink', value: data.groups[groupName]}, function(docId){
+		data.groups[groupName].docId = docId;
+		$('a#funnelLink').remove()
+	});
+}
 function parseFeed(){
 	var i = 0;
 	var hhh = $(document).height();
@@ -47,7 +57,7 @@ function parseFeed(){
 	}, 300);
 	$(`<div id="funnelTunnelProccess">
 		<div>Click to Stop</div>
-	   </div>`).prependTo('#member_requests_pagelet').find('div').click(function(){
+	   </div>`).prependTo('body').find('div').click(function(){
 	   	loadFeed()
 	   })
 	// loadFeed()

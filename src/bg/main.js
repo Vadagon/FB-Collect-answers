@@ -26,6 +26,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     }
   }
 
+  if (request.type == 'unlink') {
+    data.groups[request.value.groupName] = request.value;
+    update();
+    sendResponse(false)
+  }
+
   if (request.type == 'get')
     sendResponse(data)
     // chrome.storage.sync.get(['data'], function(result) {
@@ -160,6 +166,7 @@ var sh = {
         dataType: "json",
         data: JSON.stringify(sh.tool.genAddTo(data))
       }).done((msg) => {
+        console.log(msg)
         cb(id)
       });
     });
@@ -174,6 +181,7 @@ var sh = {
         dataType: "json",
         data: JSON.stringify(sh.tool.genNew(data))
       }).done((msg) => {
+        console.log(msg)
         if (msg) window.sheetId = msg.spreadsheetId
         cb(msg.spreadsheetId);
         // addToExisting(window.sheetId)
