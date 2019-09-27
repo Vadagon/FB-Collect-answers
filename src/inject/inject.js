@@ -18,29 +18,30 @@ $(document).ready(function() {
 
 function tryAdd() {
 	var where = '#member_requests_pagelet ._51xa:first'
-	var unlinkButton = '<button id="FunnelUnlinkButton" class="_4jy0 _4jy3 _517h _51sy _42ft">Unlink Spreadsheet</button>'
+	var unlinkButton = '<button id="FunnelUnlinkButton" class="_4jy0 _4jy3 _517h _51sy _42ft">X</button>'
 	var collectAllButton = '<button id="FunnelCollect" class="_4jy0 _4jy3 _517h _51sy _42ft">Collect All</button>'
 	var inter = setInterval(function() {
 		if(!$(where).length) return;
 
 		var groupName = $('#seo_h1_tag a').text()
 
-		if(!$(where).find('#FunnelUnlinkButton').length) $(unlinkButton).prependTo(where).click(unlinkFeed)
 		if(!$(where).find('#FunnelCollect').length) $(collectAllButton).prependTo(where).click(parseFeed)
+		if(!$(where).find('#FunnelUnlinkButton').length && groupName && data.groups[groupName] && data.groups[groupName].docId) $(unlinkButton).prependTo(where).click(unlinkFeed)
 		if(!$(where).find('a#funnelLink').length && groupName && data.groups[groupName] && data.groups[groupName].docId)  $('<a target="_blank" id="funnelLink" href="https://docs.google.com/spreadsheets/d/'+data.groups[groupName].docId+'/" style="margin-right: 10px;"> Google Sheet</a>').prependTo(where)
 
 
 		// if(!$('#funnelTunnelProccess').length) parseFeed()
 		// clearInterval(inter)
-	}, 300);
+	}, 1400);
 }
 var parseInterval;
 function unlinkFeed(){
+	if(!confirm("Do really you want to unlink google spreadsheet from the group?")) return;
 	var groupName = $('#seo_h1_tag a').text()
 	data.groups[groupName].docId = false;
 	tunnel({type: 'unlink', value: data.groups[groupName]}, function(docId){
 		data.groups[groupName].docId = docId;
-		$('a#funnelLink').remove()
+		$('a#funnelLink, #FunnelUnlinkButton').remove()
 	});
 }
 function parseFeed(){

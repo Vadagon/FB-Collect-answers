@@ -1,7 +1,7 @@
 {
   "name": "Group Answers Collector For Facebook™",
   "short_name": "GAC",
-  "version": "3",
+  "version": "4",
   "manifest_version": 2,
   "description": "Export users' answers to Google Sheets",
   "icons": {

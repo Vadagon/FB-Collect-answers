@@ -26,4 +26,8 @@
     background-color: white;
     cursor: pointer;
 }
+#FunnelUnlinkButton{
+    background-color: transparent;
+    color: red;
+}
 
