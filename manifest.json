@@ -1,12 +1,16 @@
 {
   "name": "Group Answers Collector For Facebook™",
   "short_name": "GAC",
-  "version": "4",
+  "version": "2.0.0",
   "manifest_version": 2,
   "description": "Export users' answers to Google Sheets",
   "icons": {
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "128": "img/logo_128.png",
+    "16": "img/logo_16.png",
+    "48": "img/logo_48.png"
+  },
+  "browser_action": {
+    "default_popup": "pages/popup.html"
   },
   "background": {
     "scripts": [
@@ -29,7 +33,7 @@
   "default_locale": "en",
   "content_scripts": [
     {
-      "matches": ["https://www.facebook.com/*"],
+      "matches": ["*://*.facebook.com/*"],
       "css": ["src/inject/inject.css"],
       "js": ["js/jquery.min.js", "src/inject/inject.js"]
     }

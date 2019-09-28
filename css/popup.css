@@ -1,0 +1,107 @@
+.popup{
+  padding: 0;
+  width: 600px;
+  height: 275px;
+  background-color: #29487d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 30px solid #29487d;
+  box-sizing: border-box;
+  background-color: white;
+  margin: 0;
+  padding: 0 10px;
+}
+p{
+  width: 100%;
+  font-size: 17px;
+}
+.button{
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  font-size: 1.3rem;
+  background-color: #0077dc;
+}
+.popup .control .radio{
+  margin-left: 0!important;
+}
+
+.popup .control{
+  margin-bottom: 16px;
+}
+
+.bd-callout.is-primary {
+  /*background-color: #4267b2; */
+  background-color: #29487d;
+  color: #fff;
+  border-radius: 0;
+  padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+  position: relative;
+}
+
+.columns {
+  margin-bottom: 0!important;
+  margin-top: 0!important;
+  width: 100%!important;
+}
+
+.columns .column {
+  padding: 0!important;
+}
+
+#settings{
+  margin-bottom : 8px;
+}
+#settings .control label{
+  display: block;
+}
+
+#settings .control .radio,
+#settings .control .radio *{
+  transition: 0.4s;
+}
+
+#settings .control .radio:hover{
+  color: #e9ebee;
+  font-weight: 600;
+}
+
+#settings .control input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+#settings .control .radio {
+  margin: 2px 0;
+  height: 20px;
+}
+#settings .control .radio-label{
+  height: 20px;
+}
+#settings .control .radio-label:before {
+  content: '';
+  background: #f4f4f4;
+  border-radius: 100%;
+  border: 1px solid #b4b4b4;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  margin-right: 4px;
+  vertical-align: top;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease;
+}
+
+#settings .control input[type="radio"]:checked ~ .radio-label:before {
+  background-color: #4267b2;
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+  border: 1px solid #29487d;
+}
+#settings .control input[type="radio"]:focus ~ .radio-label:before {
+  outline: none;
+  border-color: #4267b2;
+}
