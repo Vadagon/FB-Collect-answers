@@ -13,12 +13,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     update();
     if (data.groups[request.value.groupName].docId) {
       // console.log(sh.tool.genAddTo(request.value))
-      sh.addToExisting(request.value.docId, request.value, (docId) => {
+      sh.addToExisting(request.value.docId, JSON.parse(JSON.stringify(request.value)), (docId) => {
         sendResponse(docId)
       })
     } else {
       // console.log(sh.tool.genNew(request.value))
-      sh.createNew(request.value, (docId) => {
+      sh.createNew(JSON.parse(JSON.stringify(request.value)), (docId) => {
         data.groups[request.value.groupName].docId = docId;
         sendResponse(docId)
         update();
