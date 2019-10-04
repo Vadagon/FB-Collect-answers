@@ -34,7 +34,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
   if (request.type == 'get')
     sendResponse(data)
-    // chrome.storage.sync.get(['data'], function(result) {
+    // chrome.storage.local.get(['data'], function(result) {
     // });
 
   if (request.type == 'update')
@@ -82,9 +82,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 var sh = {
   token: !1,
   genToken: function(cb) {
-    chrome.identity.getAuthToken({ interactive: true }, (token) => {
-      this.token = token;
-      cb(token)
+    chrome.identity.getAuthToken((token)=>{
+      if(chrome.runtime.lastError){
+        console.log(chrome.runtime.lastError.message)
+        chrome.identity.getAuthToken({ interactive: true }, (token) => {
+          this.token = token;
+          cb(token)
+        });
+      }else{
+        this.token = token;
+        cb(token)
+      }
     })
   },
   tool: {
@@ -198,7 +206,7 @@ var sh = {
 
 
 // setting default storage paramenters
-chrome.storage.sync.get(["data"], function(items) {
+chrome.storage.local.get(["data"], function(items) {
   if (items.data) {
     data = items.data;
   } else {
@@ -209,7 +217,7 @@ chrome.storage.sync.get(["data"], function(items) {
 
 function update(e) {
   if (e) data = Object.assign(data, e)
-  chrome.storage.sync.set({ "data": data });
+  chrome.storage.local.set({ "data": data });
 }
 
 
