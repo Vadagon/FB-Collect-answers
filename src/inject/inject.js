@@ -24,6 +24,9 @@ function tryAdd() {
 		if(!$(where).length) return;
 
 		var groupName = $('#seo_h1_tag a').text()
+		if(!groupName){ 
+			groupName='cannot find group name'
+		}
 
 		if(!$(where).find('#FunnelCollect').length) $(collectAllButton).prependTo(where).click(parseFeed)
 		if(!$(where).find('#FunnelUnlinkButton').length && groupName && data.groups[groupName] && data.groups[groupName].docId) $(unlinkButton).prependTo(where).click(unlinkFeed)
