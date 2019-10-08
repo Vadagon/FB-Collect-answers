@@ -1,7 +1,7 @@
 {
   "name": "GMAC - Group Answers Collector For FB™",
   "short_name": "GMAC",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "manifest_version": 2,
   "description": "Export users' answers to Google Sheets",
   "icons": {
@@ -22,7 +22,8 @@
   "permissions": [
     "background",
     "identity",
-    "storage"
+    "storage",
+    "identity.email"
   ],
   "oauth2": {
     "client_id": "708115076090-7e494247b7077ap3rg7eg4uculrifvfc.apps.googleusercontent.com",

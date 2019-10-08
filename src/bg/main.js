@@ -82,16 +82,17 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 var sh = {
   token: !1,
   genToken: function(cb) {
-    chrome.identity.getAuthToken((token)=>{
+    chrome.identity.getAuthToken({account: {id: sh.user.id}}, (token)=>{
       if(chrome.runtime.lastError){
-        console.log(chrome.runtime.lastError.message)
-        chrome.identity.getAuthToken({ interactive: true }, (token) => {
+        console.log('needed interactive; ', chrome.runtime.lastError.message)
+        chrome.identity.getAuthToken({account: {id: sh.user.id}, interactive: true }, (token) => {
           this.token = token;
           cb(token)
         });
       }else{
         this.token = token;
         cb(token)
+        console.log('got without interactive')
       }
     })
   },
@@ -214,6 +215,9 @@ chrome.storage.local.get(["data"], function(items) {
   }
 });
 
+chrome.identity.getProfileUserInfo(function(e){
+  sh.user = e
+})
 
 function update(e) {
   if (e) data = Object.assign(data, e)
