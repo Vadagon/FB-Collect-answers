@@ -3,7 +3,7 @@
   "short_name": "GMAC",
   "version": "2.0.6",
   "manifest_version": 2,
-  "description": "Export users' answers to Google Sheets",
+  "description": "Collecting user's answers in Facebook groups to Google Sheets",
   "icons": {
     "128": "img/logo_128.png",
     "16": "img/logo_16.png",
