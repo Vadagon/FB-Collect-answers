@@ -13,6 +13,8 @@
     z-index: 2000;
     width: 100vw;
     height: 100vh;
+    background: #00000045;
+    text-align: center;
 }
 #funnelTunnelProccess > div{
 	margin: auto;
@@ -25,9 +27,34 @@
     margin-top: 40vh;
     background-color: white;
     cursor: pointer;
+    background: #0000008a;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    width: auto;
+    display: inline-block;
+    padding: 4vw;
+    font-size: 5vw;
 }
 #FunnelUnlinkButton{
     background-color: transparent;
     color: #4b4f56;
 }
 
+#FunnelCollect.newDesign{
+    float: left;
+    display: inline-block;
+    padding: 5px;
+    width: 77px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 26px;
+    /*background: #ed3949;*/
+    margin-right: 10px;
+    background: #b700ff;
+}
+#FunnelCollect.newDesign + div{
+    padding: 5px !important;
+    width: auto !important;
+}

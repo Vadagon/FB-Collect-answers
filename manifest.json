@@ -1,7 +1,7 @@
 {
   "name": "FB Google Sheet",
   "short_name": "FB",
-  "version": "2.0.8",
+  "version": "1",
   "manifest_version": 2,
   "description": "FB group",
   "icons": {
@@ -10,7 +10,7 @@
     "48": "img/logo_48.png"
   },
   "browser_action": {
-    "default_popup": "pages/popup.html"
+
   },
   "background": {
     "scripts": [
