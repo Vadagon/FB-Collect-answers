@@ -17,7 +17,7 @@ chrome.extension.sendMessage({type: 'get'}, function(res){
 		var group = res.groups[group];
 
 		group.body.forEach((e)=>{
-			e.requestDate = humanizeDate(e.requestDate)
+			e.requestDate = formatDate(e.requestDate)
 			e.parseDate = formatDate(e.parseDate)
 		})
 
