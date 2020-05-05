@@ -1,7 +1,7 @@
 {
   "name": "Group Answers Collector for Facebook™",
   "short_name": "FB",
-  "version": "3",
+  "version": "4",
   "manifest_version": 2,
   "description": "Extract the answers of member requests to a Google Sheet",
   "icons": {

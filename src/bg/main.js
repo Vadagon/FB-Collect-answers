@@ -221,11 +221,11 @@ chrome.storage.local.get(["data"], function(items) {
   }
 });
 
-chrome.identity.getProfileUserInfo(function(e){
-  sh.user = e
-  if(e && e.id)
-    sh.accountSample = {account: {id: sh.user.id}};
-})
+// chrome.identity.getProfileUserInfo(function(e){
+//   sh.user = e
+//   if(e && e.id)
+//     sh.accountSample = {account: {id: sh.user.id}};
+// })
 
 function update(e) {
   if (e) data = Object.assign(data, e)
