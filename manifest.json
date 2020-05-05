@@ -14,14 +14,11 @@
     "scripts": [
       "js/jquery.min.js",
       "src/bg/main.js"
-    ],
-    "persistent": true
+    ]
   },
   "permissions": [
-    "background",
-    "identity",
     "storage",
-    "identity.email"
+    "unlimitedStorage"
   ],
   "default_locale": "en",
   "content_scripts": [
