@@ -40,12 +40,17 @@
     background-color: transparent;
     color: #4b4f56;
 }
-
+#FunnelCollect:not(.newDesign){
+    background: #4266b2;
+    color: white;
+    border-color: #4266b2;
+}
 #FunnelCollect.newDesign{
     float: left;
     display: inline-block;
     padding: 5px;
-    width: 77px;
+    width: auto;
+    min-width: 80px;
     color: white;
     font-weight: bold;
     font-size: 14px;
@@ -53,6 +58,9 @@
     /*background: #ed3949;*/
     margin-right: 10px;
     background: #b700ff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 #FunnelCollect.newDesign + div{
     padding: 5px !important;
