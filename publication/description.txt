@@ -1,0 +1,21 @@
+	name: 		  Group Answers Collector for Facebook™
+	description:  Extract the answers of member requests to a Google Sheet
+
+
+Collecting user's answers in Facebook groups to a table like Group Funnels and Group Convert.
+
+In one click extension collects members' answers to questions of a Facebook group you moderate and export them into a Excel or CSV.
+
+1) You open pending member requests of a Facebook group you moderate.
+2) You click "Collect All" and wait for the extension to scrape answers and other info. 
+3) Click on the extension icon and see what you have got.
+4) Once you have more answers you repeat from point 1). Duplicate records are checked for and not collected.
+
+❗️Updates
+  v1: Facebook new design supported
+  v2: bugs fixed
+  v3: Automatically Approve Members
+
+Please contact me for any reason: verbalike@gmail.com
+
+❗️❗️❗️ The Chrome extension is in no way associated with Facebook and its partners.
