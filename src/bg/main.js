@@ -1,6 +1,7 @@
 console.log('background script started')
 
 var data = {
+  paid: false,
   groups: {}
 }
 
@@ -35,7 +36,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     sendResponse(data)
     // chrome.storage.local.get(['data'], function(result) {
     // });
-
+  if(request.email){
+    checkPayment(request.email, (e)=>{
+      sendResponse(e)
+      if(e) data.paid = true;
+    })
+  }
   if (request.type == 'update')
     update(request.value)
 
@@ -209,6 +215,7 @@ var sh = {
 chrome.storage.local.get(["data"], function(items) {
   if (items.data) {
     data = items.data;
+    data.paid = false;
   } else {
     update()
   }
@@ -225,6 +232,13 @@ function update(e) {
   chrome.storage.local.set({ "data": data });
 }
 
+function checkPayment(email, cb){
+  $.get('https://us-central1-margarita-1.cloudfunctions.net/DBinsert/isMember?email='+email).done((e)=>{
+    cb(e && e.result)
+  }).fail(()=>{
+    cb(false)
+  })
+}
 
 
 

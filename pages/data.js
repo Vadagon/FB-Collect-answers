@@ -1,5 +1,10 @@
+var a = {
+	payRequest: false,
+	paid: false
+}
 chrome.extension.sendMessage({type: 'get'}, function(res){
 	console.log(res)
+	a.paid = res.paid;
 	var g = 0;
 	for(var group in res.groups){
 		$('#noDataTitle').remove()
@@ -29,13 +34,10 @@ chrome.extension.sendMessage({type: 'get'}, function(res){
 		init('#table'+g, group.body, additionalColumns)
 
 		g++;
+
+		if(group.body.length > 10 && !a.paid) a.payRequest = true;
 	}
-	// console.log(group.head)
-
-	// var toArray = Object.keys(group.body).map(function(key) {
- //  		return group.body[key];
-	// });
-
+	updateUI()
 })
 
 
@@ -56,15 +58,15 @@ var init = function(id, data, columns){
 		],
 		columns:[                 //define the table columns
 			{title:"Name", field:"name"},
-			{title:"URL", field:"url", formatter:"link", formatterParams: {
+			{title:"Facebook Profile Link", field:"url", formatter:"link", formatterParams: {
 			    labelField:"name",
 			    target:"_blank"
 			}},
 			// {title:"Gender", field:"gender", width:95, editor:"select", editorParams:{values:["male", "female"]}},
 			// {title:"Rating", field:"rating", formatter:"star", hozAlign:"center", width:100, editor:true},
 			// {title:"Color", field:"col", width:130, editor:"input"},
-			{title:"Date Of Request", field:"requestDate", width:150, sorter:"date", hozAlign:"center"},
-			{title:"Date Of Parsing", field:"parseDate", width:150, sorter:"date", hozAlign:"center", formatter:"datetime", sorter:"datetime", sorterParams:{
+			// {title:"Date Of Request", field:"requestDate", width:150, sorter:"date", hozAlign:"center"},
+			{title:"Capture Date", field:"parseDate", width:150, sorter:"date", hozAlign:"center", formatter:"datetime", sorter:"datetime", sorterParams:{
 			    format:"YYYY-MM-DD hh:mm:ss",
 			    alignEmptyValues:"top",
 			}},
@@ -80,17 +82,33 @@ var init = function(id, data, columns){
 	$(id).parent().find('.download.xlsx').on('click', ()=>{
 		table.download("xlsx", data[0].groupName+".xlsx")
 	})
-	// table.download("csv", data[0].groupName+".csv")
 }
-var tabledata = [
-    {name:"Billy Bob", age:12, gender:"male", height:95, col:"red", dob:"14/05/2010", progress: 80, car: true},
-    {name:"Jenny Jane", age:42, gender:"female", height:142, col:"blue", dob:"30/07/1954"},
-    {name:"Steve McAlistaire", age:35, gender:"male", height:176, col:"green", dob:"04/11/1982"},
-];
-// init(tabledata)
 
-// console.log(moment('1584630332000').fromNow())
-// moment().format();
+
+
+$('#payRequest button').on('click', function(){
+	$('#payRequest button').text('◌')
+	chrome.extension.sendMessage({email: $('#payRequest input').val()}, (e)=>{
+		if(e) a = {payRequest: false, paid: true};
+		updateUI()
+	})
+})
+
+
+
+
+
+
+
+
+
+function updateUI(){
+	console.log(a)
+	if(!a.payRequest || a.paid) $('#payRequest').hide()
+	else $('#payRequest').show();
+	
+	$('#payRequest button').text('OK')
+}
 
 function humanizeDate(e){
 	return moment(parseInt(e)*1000).fromNow();

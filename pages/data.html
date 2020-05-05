@@ -11,8 +11,27 @@
 </head>
 <body>
 	<div id="noDataTitle">
-		<h1>No data to Display</h1>
-		<h3>Go to your group page requests and scrap some data by clicking on 'Collect All' button near the 'Approve All' button</h3>
+		<h1>You've got no data to display!</h1>
+		<h3>Return to "Member Request" in your group and capture member request details by clicking on 'Collect All' button near the 'Approve All' button</h3>
+	</div>
+	<div id="payRequest" style="display: none;">
+		<div>
+			<h1>Access to Facebook Collector is paid</h1>
+			<div>
+				<div class="leftColumn">
+					<h2>Login</h2>
+					<p>
+						Enter your email
+						<br>
+						<input type="text" name=""> <button>OK</button>
+					</p>
+				</div>
+				<div>
+					<h2>Purchase your access</h2>
+					<p><a href="https://www.group-collector.extension.expert/order">Facebook Group Answers Collector</a></p>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div id="table"></div>
 <script type="text/javascript" async="" src="data.js"></script>
@@ -28,6 +47,41 @@
 	}
 	h2 > button:hover{
 		background: #b700ff;
+	}
+	#payRequest{
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: #000000c2;
+		z-index: 12;
+		color: white;
+		text-align: center;
+	}
+	#payRequest a{
+		color: white;
+	}
+	#payRequest > div > div{
+		display: inline-block;
+	}
+	#payRequest > div{
+		margin-top: calc(50vh - 95px);
+	}
+	.leftColumn, .leftColumn + div{
+		padding: 20px;
+		margin: -2px;
+		display: inline-block;
+	}
+	.leftColumn{
+		border-right: 2px solid white;
+		text-align: left;
+	}
+	.leftColumn + div p{
+		padding: 15px 0;
+	}
+	.leftColumn + div{
+		text-align: left;
 	}
 </style>
 </body>
