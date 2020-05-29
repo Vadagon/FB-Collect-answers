@@ -1,5 +1,5 @@
 var a = {
-	payRequest: false,
+	payRequest: true,
 	paid: false
 }
 chrome.extension.sendMessage({type: 'get'}, function(res){
@@ -35,7 +35,7 @@ chrome.extension.sendMessage({type: 'get'}, function(res){
 
 		g++;
 
-		if(group.body.length > 50 && !a.paid) a.payRequest = true;
+		if(group.body.length > 10 && !a.paid) a.payRequest = true;
 	}
 	updateUI()
 })
