@@ -1,13 +1,14 @@
 var a = {
-	payRequest: true,
+	payRequest: false,
 	paid: false
 }
 chrome.extension.sendMessage({type: 'get'}, function(res){
 	console.log(res)
 	a.paid = res.paid;
 	var g = 0;
+	$('#noDataTitle').show()
 	for(var group in res.groups){
-		$('#noDataTitle').remove()
+		$('#noDataTitle').hide()
 		$(`
 			<div>
 				<h2>${group}
@@ -35,7 +36,7 @@ chrome.extension.sendMessage({type: 'get'}, function(res){
 
 		g++;
 
-		if(group.body.length > 10 && !a.paid) a.payRequest = true;
+		if(group.body.length > 2 && !a.paid) a.payRequest = true;
 	}
 	updateUI()
 })
