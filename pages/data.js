@@ -28,7 +28,7 @@ chrome.extension.sendMessage({type: 'get'}, function(res){
 		})
 
 		var additionalColumns = group.head.map((e)=>{
-			if(/(groupName|name|userId|url|requestDate|parseDate)/ig.test(e)) return false;
+			if(/^(groupName|name|userId|url|requestDate|parseDate)/ig.test(e)) return false;
 			return {title:e, field:e};
 		}).filter(e=>e)
 

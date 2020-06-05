@@ -9,9 +9,8 @@ var oldPath = {
 	name: '._66jq a',
 	requestDate: '.livetimestamp',
 	records: {
-		list: '._4wsr li',
-		question: 'div',
-		answer: 'text'
+		question: '._4wsr ._50f8',
+		answer: '._4wsr ._50f8 + *'
 	}
 }
 var newPath = {
@@ -25,9 +24,8 @@ var newPath = {
 	name: 'div:nth-child(1) span > div > a',
 	requestDate: 'div:nth-child(1) > div > div > div > div > span',
 	records: {
-		list: 'div:nth-child(2) div > ul > li',
-		question: 'span',
-		answer: 'div > span'
+		question: 'div:nth-child(2) div > ul > li span',
+		answer: 'div:nth-child(2) div > ul > li div > span'
 	}
 }
 var path = oldPath;
@@ -121,9 +119,15 @@ function loadFeed(){
 		record.requestDate = $(this).find(path.requestDate).data('utime')
 		if(!record.requestDate) record.requestDate = $(this).find(path.requestDate).eq(0).text().replace('Requested ', '')
 		record.parseDate = new Date().getTime() + index*1000;
-		$(this).find(path.records.list).each(function(){
-			record[$(this).find(path.records.question).eq(0).text()] = $(this).find(path.records.answer).eq(0).text();
+		
+		var that = this;
+		$(this).find(path.records.question).each(function(id){
+			record[$(this).text()] = $(that).find(path.records.answer).eq(id).text();
+			if(path.pathName == 'old' && !$(this).parent().find('text').length){
+				record[$(this).text()] = $(this).parent().clone().children().remove().end().text();
+			}
 		})
+		console.log(record)
 		// console.log(record)
 		Object.keys(record).forEach(function(key){
 			if(!data.groups[groupName].head.includes(key)) data.groups[groupName].head.push(key)
