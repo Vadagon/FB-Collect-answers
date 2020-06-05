@@ -24,8 +24,8 @@ var newPath = {
 	name: 'div:nth-child(1) span > div > a',
 	requestDate: 'div:nth-child(1) > div > div > div > div > span',
 	records: {
-		question: 'div:nth-child(2) div > ul > li span',
-		answer: 'div:nth-child(2) div > ul > li div > span'
+		question: 'div:nth-child(2) div > ul > li   > span',
+		answer: 'div:nth-child(2) div > ul > li     > div > span'
 	}
 }
 var path = oldPath;

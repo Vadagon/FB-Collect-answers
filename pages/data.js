@@ -87,7 +87,8 @@ var init = function(id, data, columns){
 
 
 
-$('#payRequest button').on('click', function(){
+$('#payRequest button').on('click', function(event){
+	event.preventDefault();
 	$('#payRequest button').text('◌')
 	chrome.extension.sendMessage({email: $('#payRequest input').val()}, (e)=>{
 		if(e) a = {payRequest: false, paid: true};
